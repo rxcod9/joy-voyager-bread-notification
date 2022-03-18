@@ -1,0 +1,52 @@
+name: First time
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  first-time:
+    if: "contains(github.event.head_commit.message, 'Initial commit')"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+    - name: Refactor files
+      run: |
+        sudo apt install rename -y
+        # make file runnable, might not be necessary
+        chmod +x "${GITHUB_WORKSPACE}/.github/workflows/first-time-replace.sh"
+
+        # run first-time-replace
+        "${GITHUB_WORKSPACE}/.github/workflows/first-time-replace.sh" $REPO_NAME
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "First refactor"
+      shell: bash
+      env:
+          REPO_NAME: ${{ github.event.repository.name }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+    - name: Sleep for 30 seconds
+      uses: whatnick/wait-action@master
+      with:
+        time: '5s'
+    - name: Create tag
+      uses: rickstaa/action-create-tag@v1
+      with:
+        tag: "v1.0.0"
+        message: "v1.0.0"
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: v1.0.0
+        tag_name: v1.0.0
+        body: v1.0.0
