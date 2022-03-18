@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'bread_replace_keyword' => 'BreadReplaceKeyword',
+    'bread_notification' => 'BreadNotification',
 ];

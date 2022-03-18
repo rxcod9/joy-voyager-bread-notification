@@ -1,6 +1,6 @@
 <?php
 
-namespace Joy\VoyagerBreadReplaceKeyword\Database\Seeders;
+namespace Joy\VoyagerBreadNotification\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use TCG\Voyager\Models\Permission;
@@ -13,6 +13,6 @@ class PermissionsTableSeeder extends VoyagerPermissionsTableSeeder
      */
     public function run()
     {
-        Permission::generateFor('replace_keywords');
+        Permission::generateFor('notifications');
     }
 }

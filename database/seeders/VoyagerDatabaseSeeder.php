@@ -1,6 +1,6 @@
 <?php
 
-namespace Joy\VoyagerBreadReplaceKeyword\Database\Seeders;
+namespace Joy\VoyagerBreadNotification\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -25,7 +25,7 @@ class VoyagerDatabaseSeeder extends Seeder
             // UserSettingsPermissionsTableSeeder::class,
             PermissionRoleTableSeeder::class,
             // UserSettingsTableSeeder::class,
-            ReplaceKeywordsTableSeeder::class,
+            NotificationsTableSeeder::class,
         ]);
     }
 }
