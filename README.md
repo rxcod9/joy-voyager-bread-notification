@@ -17,6 +17,7 @@ By 🐼 [Ramakant Gangwar](https://github.com/rxcod9).
 *   Composer Installed
 *   [Install Laravel](https://laravel.com/docs/installation)
 *   [Install Voyager](https://github.com/the-control-group/voyager)
+*   [Install JoyVoyagerDatatable Package](https://github.com/rxcod9/joy-voyager-datatable)
 
 ---
 
