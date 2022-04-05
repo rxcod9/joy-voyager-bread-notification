@@ -18,7 +18,7 @@ class DataTypesTableSeeder extends Seeder
                 'name'                  => 'notifications',
                 'display_name_singular' => __('joy-voyager-bread-notification::seeders.data_types.notification.singular'),
                 'display_name_plural'   => __('joy-voyager-bread-notification::seeders.data_types.notification.plural'),
-                'icon'                  => 'voyager-bread',
+                'icon'                  => 'voyager-bread voyager-bread-notification voyager-bell',
                 'model_name'            => 'Joy\\VoyagerBreadNotification\\Models\\Notification',
                 // 'policy_name'           => 'Joy\\VoyagerBreadNotification\\Policies\\NotificationPolicy',
                 // 'controller'            => 'Joy\\VoyagerBreadNotification\\Http\\Controllers\\VoyagerBreadNotificationController',
