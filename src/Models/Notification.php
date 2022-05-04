@@ -3,24 +3,13 @@
 namespace Joy\VoyagerBreadNotification\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
-use Joy\VoyagerBreadNotification\Database\Factories\NotificationFactory;
+use Ramsey\Uuid\Uuid;
 use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Traits\Resizable;
-use TCG\Voyager\Traits\Translatable;
 
-class Notification extends Model
+class Notification extends DatabaseNotification
 {
-    use HasFactory;
-    use Notifiable;
-    use Translatable;
-    use Resizable;
-
-    protected $translatable = ['name', 'description'];
-
     public const ACTIVE   = 'ACTIVE';
     public const INACTIVE = 'INACTIVE';
     public const EXPIRED  = 'EXPIRED';
@@ -36,6 +25,10 @@ class Notification extends Model
 
         if (Auth::user()) {
             $this->modified_by_id = Auth::user()->getKey();
+        }
+
+        if (empty($this->{$this->getKeyName()})) {
+            $this->{$this->getKeyName()} = Uuid::uuid4()->toString();
         }
 
         return parent::save();
@@ -98,15 +91,5 @@ class Notification extends Model
     public function parent()
     {
         return $this->belongsTo(Voyager::modelClass('Notification'));
-    }
-
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return new NotificationFactory();
     }
 }

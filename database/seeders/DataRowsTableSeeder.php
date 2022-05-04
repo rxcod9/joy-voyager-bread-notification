@@ -19,7 +19,7 @@ class DataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($notificationDataType, 'id');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'number',
+                'type'         => 'text',
                 'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.id'),
                 'required'     => 1,
                 'browse'       => 0,
@@ -31,11 +31,11 @@ class DataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'name');
+        $dataRow = $this->dataRow($notificationDataType, 'type');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.name'),
+                'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.type'),
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -46,11 +46,11 @@ class DataRowsTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'description');
+        $dataRow = $this->dataRow($notificationDataType, 'notifiable_type');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.description'),
+                'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.notifiable_type'),
                 'required'     => 1,
                 'browse'       => 1,
                 'read'         => 1,
@@ -58,6 +58,36 @@ class DataRowsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'order'        => 3,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($notificationDataType, 'notifiable_id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.notifiable_id'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 4,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($notificationDataType, 'data');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'code_editor',
+                'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.data'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 5,
             ])->save();
         }
 
@@ -88,21 +118,6 @@ class DataRowsTableSeeder extends Seeder
                 'add'          => 0,
                 'delete'       => 0,
                 'order'        => 7,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($notificationDataType, 'image');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'image',
-                'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.image'),
-                'required'     => 0,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'order'        => 8,
             ])->save();
         }
 

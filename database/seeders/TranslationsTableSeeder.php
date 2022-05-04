@@ -31,16 +31,6 @@ class TranslationsTableSeeder extends Seeder
     {
         // Adding translations for 'notifications'
         //
-        $cat = Notification::where('name', 'notification-1')->first();
-        if ($cat->exists) {
-            $this->trans('pt', $this->arr(['notifications', 'name'], $cat->id), 'notification-1');
-            $this->trans('pt', $this->arr(['notifications', 'description'], $cat->id), 'Notification 1');
-        }
-        $cat = Notification::where('name', 'notification-2')->first();
-        if ($cat->exists) {
-            $this->trans('pt', $this->arr(['notifications', 'name'], $cat->id), 'notification-2');
-            $this->trans('pt', $this->arr(['notifications', 'description'], $cat->id), 'Notification 2');
-        }
     }
 
     /**

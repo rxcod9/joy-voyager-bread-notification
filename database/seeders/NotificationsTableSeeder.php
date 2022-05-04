@@ -18,21 +18,6 @@ class NotificationsTableSeeder extends Seeder
             return false;
         }
 
-        $count = 20;
-        Notification::factory()
-            ->count($count)
-            ->state(function (array $attributes) use ($count) {
-                return [
-                    'name' => 'Notification ' . time()
-                        . ' ' . rand(1, $count)
-                        . ' ' . rand(1, $count)
-                        . ' ' . rand(1, $count),
-                    'description' => 'Notification Description ' . time()
-                        . ' ' . rand(1, $count)
-                        . ' ' . rand(1, $count)
-                        . ' ' . rand(1, $count)
-                ];
-            })
-            ->create();
+        //
     }
 }

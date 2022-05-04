@@ -14,10 +14,10 @@ class CreateNotificationsTable extends Migration
     public function up()
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
-            $table->string('image')->nullable();
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
 
             $table->bigInteger('created_by_id')->unsigned()->nullable()->default(null);
             $table->foreign('created_by_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
@@ -28,13 +28,16 @@ class CreateNotificationsTable extends Migration
             $table->bigInteger('assigned_to_id')->unsigned()->nullable()->default(null);
             $table->foreign('assigned_to_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
 
-            $table->bigInteger('parent_id')->unsigned()->nullable()->default(null);
-            $table->foreign('parent_id')->references('id')->on('notifications')->onUpdate('cascade')->onDelete('set null');
+            $table->uuid('parent_id')->nullable()->default(null);
 
-            
             $table->enum('status', ['ACTIVE', 'INACTIVE', 'EXPIRED'])->default('ACTIVE');
 
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->foreign('parent_id')->references('id')->on('notifications')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

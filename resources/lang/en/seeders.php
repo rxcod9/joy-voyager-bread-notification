@@ -2,9 +2,10 @@
 
 return [
     'data_rows' => [
-        'name'        => 'Name',
-        'description' => 'Description',
-        'image'       => 'Image',
+        'type'        => 'Type',
+        'notifiable_type' => 'Notifiable type',
+        'notifiable_id'       => 'Notifiable id',
+        'data'       => 'Data',
         'created_by'  => 'Created by',
         'modified_by' => 'Modified by',
         'assigned_to' => 'Assigned to',
