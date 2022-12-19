@@ -92,4 +92,14 @@ class Notification extends DatabaseNotification
     {
         return $this->belongsTo(Voyager::modelClass('Notification'));
     }
+
+    public function getDataBrowseAttribute()
+    {
+        return json_encode($this->data ?? [], JSON_PRETTY_PRINT);
+    }
+
+    public function getDataReadAttribute()
+    {
+        return json_encode($this->data ?? [], JSON_PRETTY_PRINT);
+    }
 }
