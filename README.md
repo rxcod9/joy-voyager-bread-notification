@@ -7,7 +7,7 @@ By 🐼 [Ramakant Gangwar](https://github.com/rxcod9).
 [![Screenshot](https://raw.githubusercontent.com/rxcod9/joy-voyager-bread-notification/main/cover.jpg)](https://joy-voyager.herokuapp.com/)
 
 [![Latest Version](https://img.shields.io/github/v/release/rxcod9/joy-voyager-bread-notification?style=flat-square)](https://github.com/rxcod9/joy-voyager-bread-notification/releases)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rxcod9/joy-voyager-bread-notification/run-tests?label=tests)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/rxcod9/joy-voyager-bread-notification/run-tests.yml?branch=main&label=tests)
 [![Total Downloads](https://img.shields.io/packagist/dt/joy/voyager-bread-notification.svg?style=flat-square)](https://packagist.org/packages/joy/voyager-bread-notification)
 
 ---
