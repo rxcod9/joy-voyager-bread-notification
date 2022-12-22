@@ -5,6 +5,7 @@ namespace Joy\VoyagerBreadNotification\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
 use TCG\Voyager\Facades\Voyager;
 
@@ -95,11 +96,21 @@ class Notification extends DatabaseNotification
 
     public function getDataBrowseAttribute()
     {
-        return json_encode($this->data ?? [], JSON_PRETTY_PRINT);
+        $translationKey = Str::slug(Str::snake($this->type ?? ''));
+
+        return __(
+            'joy-voyager-bread-notification::generic.' . $translationKey,
+            $this->data ?? []
+        );
     }
 
     public function getDataReadAttribute()
     {
-        return json_encode($this->data ?? [], JSON_PRETTY_PRINT);
+        $translationKey = Str::slug(Str::snake($this->type ?? ''));
+
+        return __(
+            'joy-voyager-bread-notification::generic.' . $translationKey,
+            $this->data ?? []
+        );
     }
 }

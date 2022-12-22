@@ -79,7 +79,7 @@ class DataRowsTableSeeder extends Seeder
         $dataRow = $this->dataRow($notificationDataType, 'data');
         if (!$dataRow->exists) {
             $dataRow->fill([
-                'type'         => 'code_editor',
+                'type'         => 'rich_text_box',
                 'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.data'),
                 'required'     => 1,
                 'browse'       => 1,
