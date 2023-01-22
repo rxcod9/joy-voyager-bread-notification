@@ -39,7 +39,9 @@ class VoyagerBreadNotificationServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        if (config('joy-voyager-bread-notification.database.autoload_migrations', true)) {
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        }
 
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'joy-voyager-bread-notification');
     }

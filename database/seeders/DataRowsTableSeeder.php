@@ -4,8 +4,6 @@ namespace Joy\VoyagerBreadNotification\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use TCG\Voyager\Facades\Voyager;
-use TCG\Voyager\Models\DataRow;
-use TCG\Voyager\Models\DataType;
 
 class DataRowsTableSeeder extends Seeder
 {
@@ -14,9 +12,10 @@ class DataRowsTableSeeder extends Seeder
      */
     public function run()
     {
-        $notificationDataType = DataType::where('slug', 'notifications')->firstOrFail();
+        $dataType = Voyager::model('DataType')->where('slug', 'notifications')->firstOrFail();
+        $order    = Voyager::model('DataRow')->whereDataTypeId($dataType->id)->max('order') ?? 0;
 
-        $dataRow = $this->dataRow($notificationDataType, 'id');
+        $dataRow = $this->dataRow($dataType, 'id');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -27,11 +26,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 1,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'type');
+        $dataRow = $this->dataRow($dataType, 'type');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -42,11 +41,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 2,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'notifiable_type');
+        $dataRow = $this->dataRow($dataType, 'notifiable_type');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -57,11 +56,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 3,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'notifiable_id');
+        $dataRow = $this->dataRow($dataType, 'notifiable_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -72,11 +71,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 4,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'data');
+        $dataRow = $this->dataRow($dataType, 'data');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'rich_text_box',
@@ -87,11 +86,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 1,
-                'order'        => 5,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'created_at');
+        $dataRow = $this->dataRow($dataType, 'created_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -102,11 +101,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 6,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'updated_at');
+        $dataRow = $this->dataRow($dataType, 'updated_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'timestamp',
@@ -117,11 +116,26 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 7,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'notification_belongsto_created_by_relationship');
+        $dataRow = $this->dataRow($dataType, 'deleted_at');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'timestamp',
+                'display_name' => __('joy-voyager-bread-notification::seeders.data_rows.deleted_at'),
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 0,
+                'edit'         => 0,
+                'add'          => 0,
+                'delete'       => 0,
+                'order'        => ++$order,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($dataType, 'notification_belongsto_created_by_relationship');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -142,11 +156,11 @@ class DataRowsTableSeeder extends Seeder
                     'pivot_table' => 'users',
                     'pivot'       => 0,
                 ],
-                'order'        => 10,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'created_by_id');
+        $dataRow = $this->dataRow($dataType, 'created_by_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -157,11 +171,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 9,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'notification_belongsto_modified_by_relationship');
+        $dataRow = $this->dataRow($dataType, 'notification_belongsto_modified_by_relationship');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -182,11 +196,11 @@ class DataRowsTableSeeder extends Seeder
                     'pivot_table' => 'users',
                     'pivot'       => 0,
                 ],
-                'order'        => 12,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'modified_by_id');
+        $dataRow = $this->dataRow($dataType, 'modified_by_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -197,11 +211,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 11,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'notification_belongsto_assigned_to_relationship');
+        $dataRow = $this->dataRow($dataType, 'notification_belongsto_assigned_to_relationship');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -222,11 +236,11 @@ class DataRowsTableSeeder extends Seeder
                     'pivot_table' => 'users',
                     'pivot'       => 0,
                 ],
-                'order'        => 14,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'assigned_to_id');
+        $dataRow = $this->dataRow($dataType, 'assigned_to_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -237,11 +251,11 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 13,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'notification_belongsto_parent_relationship');
+        $dataRow = $this->dataRow($dataType, 'notification_belongsto_parent_relationship');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'relationship',
@@ -253,7 +267,7 @@ class DataRowsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 0,
                 'details'      => [
-                    'model'       => 'Joy\\VoyagerBreadNotification\\Models\\Notification',
+                    'model'       => Voyager::modelClass('Notification'),
                     'table'       => 'notifications',
                     'type'        => 'belongsTo',
                     'column'      => 'parent_id',
@@ -262,11 +276,11 @@ class DataRowsTableSeeder extends Seeder
                     'pivot_table' => 'notifications',
                     'pivot'       => 0,
                 ],
-                'order'        => 16,
+                'order'        => ++$order,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($notificationDataType, 'parent_id');
+        $dataRow = $this->dataRow($dataType, 'parent_id');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -277,7 +291,7 @@ class DataRowsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 15,
+                'order'        => ++$order,
             ])->save();
         }
     }
@@ -292,7 +306,7 @@ class DataRowsTableSeeder extends Seeder
      */
     protected function dataRow($type, $field)
     {
-        return DataRow::firstOrNew([
+        return Voyager::model('DataRow')->firstOrNew([
             'data_type_id' => $type->id,
             'field'        => $field,
         ]);

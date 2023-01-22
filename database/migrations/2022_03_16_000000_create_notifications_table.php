@@ -34,6 +34,7 @@ class CreateNotificationsTable extends Migration
 
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::table('notifications', function (Blueprint $table) {

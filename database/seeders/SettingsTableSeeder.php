@@ -3,6 +3,7 @@
 namespace Joy\VoyagerBreadNotification\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Models\Setting;
 
 class SettingsTableSeeder extends Seeder
@@ -46,6 +47,6 @@ class SettingsTableSeeder extends Seeder
      */
     protected function findSetting($key)
     {
-        return Setting::firstOrNew(['key' => $key]);
+        return Voyager::model('Setting')->firstOrNew(['key' => $key]);
     }
 }

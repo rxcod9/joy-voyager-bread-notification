@@ -3,7 +3,7 @@
 namespace Joy\VoyagerBreadNotification\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use TCG\Voyager\Models\DataType;
+use TCG\Voyager\Facades\Voyager;
 
 class DataTypesTableSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_singular' => __('joy-voyager-bread-notification::seeders.data_types.notification.singular'),
                 'display_name_plural'   => __('joy-voyager-bread-notification::seeders.data_types.notification.plural'),
                 'icon'                  => 'voyager-bread voyager-bread-notification voyager-bell',
-                'model_name'            => 'Joy\\VoyagerBreadNotification\\Models\\Notification',
+                'model_name'            => Voyager::modelClass('Notification'),
                 // 'policy_name'           => 'Joy\\VoyagerBreadNotification\\Policies\\NotificationPolicy',
                 // 'controller'            => 'Joy\\VoyagerBreadNotification\\Http\\Controllers\\VoyagerBreadNotificationController',
                 'generate_permissions'  => 1,
@@ -38,6 +38,6 @@ class DataTypesTableSeeder extends Seeder
      */
     protected function dataType($field, $for)
     {
-        return DataType::firstOrNew([$field => $for]);
+        return Voyager::model('DataType')->firstOrNew([$field => $for]);
     }
 }

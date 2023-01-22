@@ -3,10 +3,12 @@
 namespace Joy\VoyagerBreadNotification\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Joy\VoyagerBreadNotification\Models\Notification;
-use TCG\Voyager\Models\DataType;
-use TCG\Voyager\Models\MenuItem;
-use TCG\Voyager\Models\Translation;
+use TCG\Voyager\Facades\Voyager;
+
+use TCG\Voyager\Models\{
+    MenuItem,
+    Translation
+};
 
 class TranslationsTableSeeder extends Seeder
 {
@@ -44,8 +46,8 @@ class TranslationsTableSeeder extends Seeder
         //
         $_fld = 'display_name_singular';
         $_tpl = ['data_types', $_fld];
-        
-        $dtp = DataType::where($_fld, __('joy-voyager-bread-notification::seeders.data_types.category.singular'))->firstOrFail();
+
+        $dtp = Voyager::model('DataType')->where($_fld, __('joy-voyager-bread-notification::seeders.data_types.category.singular'))->firstOrFail();
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Notification');
         }
@@ -54,7 +56,7 @@ class TranslationsTableSeeder extends Seeder
         //
         $_fld = 'display_name_plural';
         $_tpl = ['data_types', $_fld];
-        $dtp = DataType::where($_fld, __('joy-voyager-bread-notification::seeders.data_types.category.plural'))->firstOrFail();
+        $dtp  = Voyager::model('DataType')->where($_fld, __('joy-voyager-bread-notification::seeders.data_types.category.plural'))->firstOrFail();
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Notifications');
         }
@@ -67,7 +69,7 @@ class TranslationsTableSeeder extends Seeder
      */
     private function menusTranslations()
     {
-        $_tpl = ['menu_items', 'title'];
+        $_tpl  = ['menu_items', 'title'];
         $_item = $this->findMenuItem(__('joy-voyager-bread-notification::seeders.menu_items.notifications'));
         if ($_item->exists) {
             $this->trans('pt', $this->arr($_tpl, $_item->id), 'Notifications');
@@ -76,7 +78,7 @@ class TranslationsTableSeeder extends Seeder
 
     private function findMenuItem($title)
     {
-        return MenuItem::where('title', $title)->firstOrFail();
+        return Voyager::model('MenuItem')->where('title', $title)->firstOrFail();
     }
 
     private function arr($par, $id)

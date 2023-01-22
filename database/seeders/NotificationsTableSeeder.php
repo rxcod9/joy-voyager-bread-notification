@@ -2,8 +2,8 @@
 
 namespace Joy\VoyagerBreadNotification\Database\Seeders;
 
-use Joy\VoyagerBreadNotification\Models\Notification;
 use Illuminate\Database\Seeder;
+use TCG\Voyager\Facades\Voyager;
 
 class NotificationsTableSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class NotificationsTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Notification::query()->count() > 0) {
+        if (Voyager::model('Notification')->query()->count() > 0) {
             return false;
         }
 

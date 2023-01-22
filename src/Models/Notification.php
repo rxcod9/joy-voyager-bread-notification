@@ -3,6 +3,7 @@
 namespace Joy\VoyagerBreadNotification\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -11,6 +12,8 @@ use TCG\Voyager\Facades\Voyager;
 
 class Notification extends DatabaseNotification
 {
+    use SoftDeletes;
+
     public const ACTIVE   = 'ACTIVE';
     public const INACTIVE = 'INACTIVE';
     public const EXPIRED  = 'EXPIRED';
