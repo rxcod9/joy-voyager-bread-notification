@@ -39,7 +39,7 @@ jobs:
       with:
         time: '5s'
     - name: Create tag
-      uses: rickstaa/action-create-tag@v1
+      uses: rickstaa/action-create-tag@v1.5.4
       with:
         tag: "v1.0.0"
         message: "v1.0.0"
